@@ -1,4 +1,4 @@
-># Alarm Clock
+> # [Wake-Me-Up an_Alarm_Clock](https://kapishverma.github.io/Wake-Me-Up-an_Alarm_Clock/ "Want to try? Hit this link")
 ![](media/1.png)
  >## How to set an alarm?
   1. To set an **Alarm time**
