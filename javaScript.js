@@ -90,7 +90,7 @@ function renderList() {
     for (let i = 0; i < localStorage.length; i++) {
         var pass = JSON.parse(localStorage.getItem(localStorage.key(i)));
         if(pass !== 'W' || pass !== 'F'){  // localStorage is storing data for IMDb also;
-            addToAlarmArray(pass);} //(line-no-43)
+            addToAlarmArray(pass); //(line-no-43)
         }                              
     }
 }
