@@ -53,9 +53,7 @@ background-color: #9206fd;}
     height: 46px;
     width: 46px;
 }
-#timeInput::-webkit-calendar-picker-indicator:hover{
-    cursor: pointer;
-}
+
 .bi-stopwatch {
     position: absolute;
     right: 0;
