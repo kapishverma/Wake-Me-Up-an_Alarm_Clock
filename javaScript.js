@@ -21,8 +21,10 @@ var setTime = () => {
     s = d.getSeconds();
     // here matching, if any alarm time is matching with current time or not?
     for (let i = 0; i < localStorage.length; i++) {
-
         var alarm_object = JSON.parse(localStorage.getItem(localStorage.key(i)));
+                if(alarm_object === 'W' || alarm_object === 'F'){
+                 continue;  // localStorage is storing data for IMDb also;
+               }
         var formatTime = alarm_object.time.split(":"); //converting to array of hour / minute / second
 
         if ((formatTime[0] == h && formatTime[1] == m && formatTime[2] == s) && !alarm_object.completed) {
@@ -84,11 +86,12 @@ function toggleBell_localStorage(KEY) {
 
 //********************* Render List **********************************
 function renderList() {
-
     alarmlist.innerHTML = '';
     for (let i = 0; i < localStorage.length; i++) {
         var pass = JSON.parse(localStorage.getItem(localStorage.key(i)));
-        addToAlarmArray(pass);                                 //(line-no-43)
+        if(pass !== 'W' || pass !== 'F'){  // localStorage is storing data for IMDb also;
+            addToAlarmArray(pass);} //(line-no-43)
+        }                              
     }
 }
 //********************** handle delete and on/off *************
