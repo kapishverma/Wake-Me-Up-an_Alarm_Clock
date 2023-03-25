@@ -42,7 +42,7 @@ var setTime = () => {
     minute.style.transform = `rotate(${m * 6}deg)`;
     second.style.transform = `rotate(${s * 6}deg)`;
 }
-//************ add lists to ul and object to alarm_array ************$$$$$$$
+//************ add alarm to unorderedList****************************
 function addToAlarmArray(task) {
 
     const list = document.createElement("li");
