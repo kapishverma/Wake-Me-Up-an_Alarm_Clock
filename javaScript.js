@@ -158,8 +158,9 @@ function initialising() {
     let n = localStorage.length;
     for (let i = n - 1; i >= 0; i--) {
         var pass = JSON.parse(localStorage.getItem(localStorage.key(i)));
-        addToAlarmArray(pass); //(line-no-43)
-    }
+               if(pass !== 'W' || pass !== 'F'){
+        addToAlarmArray(pass);} //(line-no-43)
+        }
 }
 
 initialising();//(line-no-157)
