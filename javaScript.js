@@ -21,17 +21,19 @@ var setTime = () => {
     s = d.getSeconds();
     // here matching, if any alarm time is matching with current time or not?
     for (let i = 0; i < localStorage.length; i++) {
-        var alarm_object = JSON.parse(localStorage.getItem(localStorage.key(i)));
-                if(alarm_object === 'W' || alarm_object === 'F'){
-                 continue;  // localStorage is storing data for IMDb also;
-               }
-        var formatTime = alarm_object.time.split(":"); //converting to array of hour / minute / second
 
-        if ((formatTime[0] == h && formatTime[1] == m && formatTime[2] == s) && !alarm_object.completed) {
-            audio.play();
-            notify.classList.toggle("off");
-            notify.innerHTML = `Its <b>${h == 12 ? 12 : h % 12} : ${m} : ${s} ${h >= 12 ? "PM" : "AM"}</b> go back to work. <br><span>Hit me to turn off Alarm</span>`;
-            toggleBell_localStorage(localStorage.key(i));  //(line-n0-76)
+        var pass = localStorage.getItem(localStorage.key(i));
+        if (pass !== 'W' && pass !== 'F') {  // localStorage is storing data for IMDb also;
+
+            var alarm_object = JSON.parse(pass);
+            var formatTime = alarm_object.time.split(":"); //converting to array of hour / minute / second
+
+            if ((formatTime[0] == h && formatTime[1] == m && formatTime[2] == s) && !alarm_object.completed) {
+                audio.play();
+                notify.classList.toggle("off");
+                notify.innerHTML = `Its <b>${h == 12 ? 12 : h % 12} : ${m} : ${s} ${h >= 12 ? "PM" : "AM"}</b> go back to work. <br><span>Hit me to turn off Alarm</span>`;
+                toggleBell_localStorage(localStorage.key(i));  //(line-n0-76)
+            }
         }
     }
     // here updating time in display
@@ -40,7 +42,6 @@ var setTime = () => {
     minute.style.transform = `rotate(${m * 6}deg)`;
     second.style.transform = `rotate(${s * 6}deg)`;
 }
-
 //************ add lists to ul and object to alarm_array ************$$$$$$$
 function addToAlarmArray(task) {
 
@@ -88,10 +89,10 @@ function toggleBell_localStorage(KEY) {
 function renderList() {
     alarmlist.innerHTML = '';
     for (let i = 0; i < localStorage.length; i++) {
-        var pass = JSON.parse(localStorage.getItem(localStorage.key(i)));
-        if(pass !== 'W' || pass !== 'F'){  // localStorage is storing data for IMDb also;
-            addToAlarmArray(pass); //(line-no-43)
-        }                              
+        var pass = localStorage.getItem(localStorage.key(i));
+        if (pass !== 'W' && pass !== 'F') {  // localStorage is storing data for IMDb also;
+            addToAlarmArray(JSON.parse(pass));  //(line-no-43) 
+        }
     }
 }
 //********************** handle delete and on/off *************
@@ -160,16 +161,17 @@ notify.addEventListener('click', () => {
 function initialising() {
     let n = localStorage.length;
     for (let i = n - 1; i >= 0; i--) {
-        var pass = JSON.parse(localStorage.getItem(localStorage.key(i)));
-               if(pass !== 'W' || pass !== 'F'){
-        addToAlarmArray(pass);} //(line-no-43)
-        }
+        var pass = localStorage.getItem(localStorage.key(i));
+        if (pass !== 'W' && pass !== 'F') {
+            addToAlarmArray(JSON.parse(pass));
+        } //(line-no-43)
+    }
 }
 
 initialising();//(line-no-157)
 
 // now timer***********************************************************
-setInterval(() => { 
+setInterval(() => {
     setTime();                                  //(line-no-16)
 }, 1000);
 
